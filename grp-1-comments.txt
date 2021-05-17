@@ -1,0 +1,20 @@
+Usage:
+
+1. Was able to enter an invalid ID:
+------------------------
+Enter ID of user you are sending to (0 to cancel)
+ABC
+Please enter a valid ID
+Enter amount
+500
+This is your current balance 1000.00
+Exception in thread "main" com.techelevator.tenmo.services.TransferServiceException: 500 : {"timestamp":"2021-04-27T18:52:43.031+00:00","status":500,"error":"Internal Server Error","message":"PreparedStatementCallback; SQL [INSERT INTO transfers(transfer_type_id, transfer_status_id, account_from, account_to, amount) VALUES(2,2,?,?,?)]; ERROR: insert or update on table \"transfers\" violates foreign key constraint \"fk_transfers_accounts_to\"\n  Detail: Key (account_to)=(0) is not present in table \"accounts\".; nested exception is org.postgresql.util.PSQLException: ERROR: insert or update on table \"transfers\" violates foreign key constraint \"fk_transfers_accounts_to\"\n  Detail: Key (account_to)=(0) is not present in table \"accounts\".","path":"/transfer"}
+	at com.techelevator.tenmo.services.TransferService.sendTransfer(TransferService.java:40)
+	at com.techelevator.tenmo.App.sendBucks(App.java:155)
+------------------------
+
+2. When selecting users to send money to, the sender is not excluded.
+
+Code:
+
+1. Requires a lot of clean-up, unused code and comments.
